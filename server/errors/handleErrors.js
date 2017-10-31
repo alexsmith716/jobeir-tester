@@ -5,6 +5,7 @@ import * as errors from '../errors/types';
  * Catches errors and passes them to our middleware
  * @param {*} fn 
  */
+
 export const catchErrors = fn => (req, res, next) =>
   fn(req, res, next).catch(next);
 
@@ -28,6 +29,10 @@ Production Error Hanlder
 No stacktraces are leaked to user
 */
 export const errorHandler = (err, req, res, next) => {
+
+  console.log('>>>>>>>>>>> handleErrors.js > err.message: ', err.message);
+  console.log('>>>>>>>>>>> handleErrors.js > err.status: ', err.status);
+
   switch (err.message) {
     /**
      * Company Errors

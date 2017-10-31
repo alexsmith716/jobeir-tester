@@ -6,6 +6,8 @@ const WebpackIsomorphicTools = require('webpack-isomorphic-tools');
 const webpackIsomorphicToolsConfig = require('./webpack/webpack.config.isomorphic');
 const projectBasePath = require('path').resolve(__dirname, './');
 
+console.log('>>>>>>>>>>> index.js > <<<<<<<<<<<<<');
+
 require('babel-register')({
   plugins: [
     [
@@ -25,16 +27,20 @@ require('isomorphic-fetch');
 
 // prettier-ignore
 if (process.env.NODE_ENV === 'production') {
-  global.webpackIsomorphicTools = new WebpackIsomorphicTools(
-    webpackIsomorphicToolsConfig
-  ).server(projectBasePath, () => {
+
+  global.webpackIsomorphicTools = new WebpackIsomorphicTools(webpackIsomorphicToolsConfig).server(projectBasePath, () => {
+
     require('./build/server/server.bundle');
+
   });
+
 } else {
+
 // Babel polyfill to convert ES6 code in runtime
-  global.webpackIsomorphicTools = new WebpackIsomorphicTools(
-    webpackIsomorphicToolsConfig
-  ).server(projectBasePath, () => {
+  global.webpackIsomorphicTools = new WebpackIsomorphicTools(webpackIsomorphicToolsConfig).server(projectBasePath, () => {
+
     require('./server/server');
+
   });
+  
 }

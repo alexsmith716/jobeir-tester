@@ -3,6 +3,8 @@ if (process.env.NODE_ENV === 'production') {
   cssModulesIdentName = '[hash:base64]';
 }
 
+console.log('>>>>>>>>>>> webpack.config.babel.js > <<<<<<<<<<<<<');
+
 module.exports = {
   output: {
     publicPath: '/',
