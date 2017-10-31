@@ -2,11 +2,14 @@ const webpack = require('webpack');
 const path = require('path');
 const WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 const webpackIsomorphicToolsConfig = require('./webpack.config.isomorphic');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-  .BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 require('dotenv').config();
 
 const PUBLIC_PATH = `/${process.env.PUBLIC_PATH || ''}/`.replace('//', '/');
+
+console.log('>>>>>>>>>>> webpack.config.dev.js > <<<<<<<<<<<<<');
+
+console.log('>>>>>>>>>>> webpack.config.dev.js > PUBLIC_PATH: ', PUBLIC_PATH);
 
 // pretier-ignore
 module.exports = {
@@ -58,11 +61,13 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.IgnorePlugin(/\/iconv-loader$/),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks: Infinity,
       filename: '[name].[hash].js'
     }),
+
     new webpack.DefinePlugin({
       'process.env': {
         CLIENT: JSON.stringify(true),
@@ -77,9 +82,9 @@ module.exports = {
       __SERVER__: false,
       __DEVELOPMENT__: true
     }),
-    new WebpackIsomorphicToolsPlugin(
-      webpackIsomorphicToolsConfig
-    ).development(),
+
+    new WebpackIsomorphicToolsPlugin(webpackIsomorphicToolsConfig).development(),
+
     new BundleAnalyzerPlugin({
       analyzerMode: 'server',
       analyzerPort: 8888,

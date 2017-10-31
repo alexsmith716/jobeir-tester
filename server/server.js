@@ -18,6 +18,8 @@ import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import dotenv from 'dotenv';
 
+console.log('>>>>>>>>>>> server.js <<<<<<<<<<<<<');
+
 global.__CLIENT__ = false;
 global.__SERVER__ = true;
 global.__DEVELOPMENT__ = process.env.NODE_ENV !== 'production';
@@ -83,7 +85,7 @@ app.use(
     secret: process.env.COOKIE_SECRET,
     resave: false,
     saveUninitialized: true
-  }),(req, res, next) => { console.log('>>>>>>>>>>> server.js > cookieSession <<<<<<<<<<<<<');next();}
+  }),(req, res, next) => { console.log('>>>>>>>>>>> server.js > cookieSession <<<<<<<<<<<<<');next(); }
 );
 
 // Adding security headers to all requests
@@ -106,44 +108,21 @@ app.use((req, res, next) => {
     console.log('REQ.user +++++: NO USER');
   };
   console.log('<<<<<<<<<<< GOING THROUGH APP NOW >>>>>>>>>>>>>');
+  // authorization: 'Bearer eyJhbGciOgiJIU',
   next();
 });
 
-// NO JWT
-//REQ.headers ++++:  { host: 'localhost:3000',
-//  'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:56.0) Gecko/20100101 Firefox/56.0',
-//  accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-//  'accept-language': 'en-US,en;q=0.5',
-//  'accept-encoding': 'gzip, deflate',
-//  dnt: '1',
-//  connection: 'keep-alive',
-//  'upgrade-insecure-requests': '1',
-//  'if-none-match': 'W/"ae1e-9nlP0VAZRj33zV/bGaimIHzJ8G0"' }
-
-
 // 401 request restricted URL incorrect credentials
 // handling requests without a token (returning 401)
-app.use(serverConfig.handleNoToken);
-
-/*
-app.use((err, req, res, next) => {
-  console.log('>>>>>> server.js > no JWT > ');
-  if (err.name === 'UnauthorizedError') { 
-    res.send(401, 'invalid token...');
-  }
-});
-*/
+// app.use(serverConfig.handleNoToken);
 
 // https://github.com/themikenicholson/passport-jwt
 // Setting up API routes, oAuth routes,
-app.use(
-  '/api/v0',
-  jwt({ secret: process.env.JWT }).unless({ path: routesArray }),
-  apiRoutes
-);
+app.use( '/api/v0', jwt({ secret: process.env.JWT }).unless({ path: routesArray }), apiRoutes );
 
 app.use(oAuthRoutes);
 
+// 
 app.use(errorHandler);
 
 // Set native promises as mongoose promise
@@ -183,10 +162,7 @@ app.use((req, res, next) => {
       }
 
       if (redirectLocation) {
-        return res.redirect(
-          302,
-          redirectLocation.pathname + redirectLocation.search
-        );
+        return res.redirect( 302, redirectLocation.pathname + redirectLocation.search );
       }
 
       if (!renderProps) {
