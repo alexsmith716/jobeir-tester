@@ -1,0 +1,10 @@
+{
+    "apps": [
+        {
+            "name": "project",
+            "script": "npm",
+            "args" : "start:prod"
+        }
+    ]
+}
+
