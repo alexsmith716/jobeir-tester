@@ -4,6 +4,9 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import serverConfig from '../../../../server/config/config';
 
+// <script type="text/javascript" src="https://js.stripe.com/v3/" />
+// <script type="text/javascript" src={`https://maps.googleapis.com/maps/api/js?key=${serverConfig.google.MAPS_API_KEY}&libraries=places`}/>
+
 const Html = (props: {
   css: {},
   assets: Array<string>,
@@ -21,7 +24,6 @@ const Html = (props: {
         {helmet.meta.toComponent()}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         {helmet.link.toComponent()}
-        <script type="text/javascript" src="https://js.stripe.com/v3/" />
         {Object.keys(assets.styles).length > 0 &&
           Object.keys(assets.styles)
             .reverse()
@@ -36,11 +38,6 @@ const Html = (props: {
         <style dangerouslySetInnerHTML={{ __html: css }} />
       </head>
       <body>
-        <script
-          type="text/javascript"
-          src={`https://maps.googleapis.com/maps/api/js?key=${serverConfig
-            .google.MAPS_API_KEY}&libraries=places`}
-        />
         <main
           id="app"
           dangerouslySetInnerHTML={{ __html: `<div>${content}</div>` }}
