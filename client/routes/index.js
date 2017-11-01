@@ -61,14 +61,14 @@ const routes = (
       }}
     />
     <Route
-      path="/signin"
+      path="/login"
       getComponent={(nextState, cb) => {
         require.ensure(
           [],
           require => {
             cb(null, require('../modules/auth/login/containers/Login').default);
           },
-          'signin'
+          'login'
         );
       }}
     />
@@ -213,88 +213,87 @@ const routes = (
           'account'
         );
       }}
-    >
-      <Route
-        path="/account/company"
-        name="Company"
-        getComponent={(nextState, cb) => {
-          require.ensure(
-            [],
-            require => {
-              cb(
-                null,
-                require('../modules/account/company/containers/Company').default
-              );
-            },
-            'account-company'
-          );
-        }}
-      />
-      <Route
-        path="/account/jobs"
-        name="Jobs"
-        getComponent={(nextState, cb) => {
-          require.ensure(
-            [],
-            require => {
-              cb(
-                null,
-                require('../modules/account/jobs/containers/Jobs').default
-              );
-            },
-            'account-jobs'
-          );
-        }}
-      />
-      <Route
-        path="/account/profile"
-        name="Profile"
-        getComponent={(nextState, cb) => {
-          require.ensure(
-            [],
-            require => {
-              cb(
-                null,
-                require('../modules/account/profile/containers/Profile').default
-              );
-            },
-            'account-profile'
-          );
-        }}
-      />
-      <Route
-        path="/account/jobs/:jobId"
-        name="Job"
-        getComponent={(nextState, cb) => {
-          require.ensure(
-            [],
-            require => {
-              cb(
-                null,
-                require('../modules/account/jobs/posting/containers/JobPostingToggle')
-                  .default
-              );
-            },
-            'account-job'
-          );
-        }}
-      />
-      <Route
-        path="/account/people"
-        getComponent={(nextState, cb) => {
-          require.ensure(
-            [],
-            require => {
-              cb(
-                null,
-                require('../modules/account/people/containers/People').default
-              );
-            },
-            'account-people'
-          );
-        }}
-      />
-    </Route>
+    />
+    <Route
+      path="/account/company"
+      name="Company"
+      getComponent={(nextState, cb) => {
+        require.ensure(
+          [],
+          require => {
+            cb(
+              null,
+              require('../modules/account/company/containers/Company').default
+            );
+          },
+          'account-company'
+        );
+      }}
+    />
+    <Route
+      path="/account/jobs"
+      name="Jobs"
+      getComponent={(nextState, cb) => {
+        require.ensure(
+          [],
+          require => {
+            cb(
+              null,
+              require('../modules/account/jobs/containers/Jobs').default
+            );
+          },
+          'account-jobs'
+        );
+      }}
+    />
+    <Route
+      path="/account/profile"
+      name="Profile"
+      getComponent={(nextState, cb) => {
+        require.ensure(
+          [],
+          require => {
+            cb(
+              null,
+              require('../modules/account/profile/containers/Profile').default
+            );
+          },
+          'account-profile'
+        );
+      }}
+    />
+    <Route
+      path="/account/jobs/:jobId"
+      name="Job"
+      getComponent={(nextState, cb) => {
+        require.ensure(
+          [],
+          require => {
+            cb(
+              null,
+              require('../modules/account/jobs/posting/containers/JobPostingToggle')
+                .default
+            );
+          },
+          'account-job'
+        );
+      }}
+    />
+    <Route
+      path="/account/people"
+      getComponent={(nextState, cb) => {
+        require.ensure(
+          [],
+          require => {
+            cb(
+              null,
+              require('../modules/account/people/containers/People').default
+            );
+          },
+          'account-people'
+        );
+      }}
+    />
     <Route
       path="*"
       getComponent={(nextState, cb) => {
@@ -318,6 +317,7 @@ const routes = (
  * instead of rendering a server rendered react file.
  * @param {*} obj 
  */
+
 function getRoutesArray(obj: {}) {
   const arr = [
     '/api/v0/login',
