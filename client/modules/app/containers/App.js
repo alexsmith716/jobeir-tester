@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { Provider } from 'react-redux';
-import { StripeProvider } from 'react-stripe-elements';
+//import { StripeProvider } from 'react-stripe-elements';
 import { Router } from 'react-router';
 import { ReduxAsyncConnect } from 'redux-connect';
 import ReactGA from 'react-ga';
@@ -16,11 +16,13 @@ import { goToTopOfPage } from '../../../utils/scrolling';
  * and adjusting the scroll position, specifically for the creation
  * process on mobile.
  */
+/*
 const handleUpdate = () => {
   ReactGA.set({ page: window.location.pathname + window.location.search });
   ReactGA.pageview(window.location.pathname + window.location.search);
   goToTopOfPage();
 };
+*/
 
 export default function App(props: { store: {}, history: {} }) {
   const { store, history } = props;
@@ -28,14 +30,11 @@ export default function App(props: { store: {}, history: {} }) {
   return (
     <Provider store={store}>
       <IntlWrapper>
-        <StripeProvider apiKey={process.env.STRIPE_PUBLIC}>
-          <Router
-            render={renderProps => <ReduxAsyncConnect {...renderProps} />}
-            history={history}
-            routes={routes}
-            onUpdate={handleUpdate}
-          />
-        </StripeProvider>
+        <Router
+          render={renderProps => <ReduxAsyncConnect {...renderProps} />}
+          history={history}
+          routes={routes}
+        />
       </IntlWrapper>
     </Provider>
   );
