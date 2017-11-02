@@ -1,7 +1,7 @@
 import JwtStrategy from 'passport-jwt/lib/strategy';
 import ExtractJwt from 'passport-jwt/lib/extract_jwt';
 import Users from '../models/Users';
-import serverConfig from '../config/config';
+import serverConfig from './config';
 import GoogleStrategy from 'passport-google-oauth20';
 import FacebookStrategy from 'passport-facebook';
 import GitHubStrategy from 'passport-github2';
@@ -33,7 +33,7 @@ const passportInit = passport => {
       {
         clientID: serverConfig.googleAuth.clientID,
         clientSecret: serverConfig.googleAuth.clientSecret,
-        callbackURL: serverConfig.googleAuth.callbackURL,
+        callbackURL: serverConfig.googleAuth.callbackURL
       },
       passportFindOrCreate
     )
@@ -73,7 +73,9 @@ const passportInit = passport => {
   });
 
   passport.deserializeUser((id, done) => {
-    Users.findById(id).then(user => done(null, user)).catch(done);
+    Users.findById(id)
+      .then(user => done(null, user))
+      .catch(done);
   });
 };
 
