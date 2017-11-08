@@ -2,7 +2,8 @@ const webpack = require('webpack');
 const path = require('path');
 const WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 const webpackIsomorphicToolsConfig = require('./webpack.config.isomorphic');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin;
 require('dotenv').config();
 
 const PUBLIC_PATH = `/${process.env.PUBLIC_PATH || ''}/`.replace('//', '/');
@@ -18,7 +19,7 @@ module.exports = {
   entry: {
     app: [
       'eventsource-polyfill',
-      'webpack-hot-middleware/client',
+      'webpack-hot-middleware/client?reload=true',
       'webpack/hot/only-dev-server',
       'react-hot-loader/patch',
       'babel-polyfill',
@@ -83,7 +84,9 @@ module.exports = {
       __DEVELOPMENT__: true
     }),
 
-    new WebpackIsomorphicToolsPlugin(webpackIsomorphicToolsConfig).development(),
+    new WebpackIsomorphicToolsPlugin(
+      webpackIsomorphicToolsConfig
+    ).development(),
 
     new BundleAnalyzerPlugin({
       analyzerMode: 'server',
