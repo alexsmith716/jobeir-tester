@@ -1,1 +1,11 @@
-{"javascript":{"app":"/public/static/dist/client/app.6288e443d8c039fef91a.js","vendor":"/public/static/dist/client/vendor.a9d1bc7f561bfc517a6a.js"},"styles":{"app":"/public/static/dist/client/app.font.6288e443d8c039fef91a.css"},"assets":{},"webpack":{"version":"3.6.0"}}
+{
+  "javascript": {
+    "app": "/app.016d413122c8897386f0.js",
+    "vendor": "/vendor.e2e74ca2ec8dd70640d1.js"
+  },
+  "styles": {},
+  "assets": {},
+  "webpack": {
+    "version": "3.6.0"
+  }
+}
